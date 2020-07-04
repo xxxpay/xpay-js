@@ -131,10 +131,10 @@ gulp build --channels=wx_lite
     var xpay = require('xpay-js');
     ```
 
-#### 使用服务端创建的 [charge](https://www.mofanbaby.com/docs/xpay/overview) 调用接口
+#### 使用服务端创建的 [payment](https://www.mofanbaby.com/docs/xpay/overview) 调用接口
 
 ``` javascript
-// 参数一：支付参数 charge/order/recharge
+// 参数一：支付参数 payment/order/recharge
 // 参数二：支付结果回调
 xpay.createPayment(data, function(result, err) {
   if (result == "success") {
@@ -147,9 +147,9 @@ xpay.createPayment(data, function(result, err) {
   }
 });
 ```
-如果 `charge` 正确的话，会跳转到相应的支付页面，要求用户进行付款。
+如果 `payment` 正确的话，会跳转到相应的支付页面，要求用户进行付款。
 
-用户支付成功后，会跳转到创建 `charge` 时定义的 `result_url` 或者 `success_url`。如果用户取消支付，则会跳转到 `result_url` 或者 `cancel_url`（具体情况根据渠道不同会有所变化）。
+用户支付成功后，会跳转到创建 `payment` 时定义的 `result_url` 或者 `success_url`。如果用户取消支付，则会跳转到 `result_url` 或者 `cancel_url`（具体情况根据渠道不同会有所变化）。
 
 #### 如果不想直接跳转到支付页面，而是获取支付页面地址
 在调用 `xpay.createPayment` 之前，调用
@@ -193,7 +193,7 @@ $code = $_GET['code'];
 $open_id = \Xpay\WxpubOAuth::getOpenid($wx_app_id, $wx_app_secret, $code);
 ```
 
-##### 将 `open_id` 作为创建 `charge` 时的 `extra` 参数，具体方法参考[技术文档](https://www.mofanbaby.com/api/xpay#%E6%94%AF%E4%BB%98%E6%B8%A0%E9%81%93-extra-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E)，例：
+##### 将 `open_id` 作为创建 `payment` 时的 `extra` 参数，具体方法参考[技术文档](https://www.mofanbaby.com/api/xpay#%E6%94%AF%E4%BB%98%E6%B8%A0%E9%81%93-extra-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E)，例：
 
 ```js
 {
@@ -211,10 +211,10 @@ $open_id = \Xpay\WxpubOAuth::getOpenid($wx_app_id, $wx_app_secret, $code);
 }
 ```
 
-##### 得到 `charge` 后，在页面中引用 `xpay.js`，调用 `xpay.createPayment`，结果会直接在 `callback` 中返回。
+##### 得到 `payment` 后，在页面中引用 `xpay.js`，调用 `xpay.createPayment`，结果会直接在 `callback` 中返回。
 
 ```js
-xpay.createPayment(charge, function(result, err) {
+xpay.createPayment(payment, function(result, err) {
   if (result=="success") {
     // payment succeeded
   } else {
@@ -248,7 +248,7 @@ $code = $_GET['code'];
 $open_id = \Xpay\WxpubOAuth::getOpenid($wx_app_id, $wx_app_secret, $code);
 ```
 
-##### 将 `open_id` 作为创建 `charge` 时的 `extra` 参数，具体方法参考[技术文档](https://www.mofanbaby.com/api/xpay#%E6%94%AF%E4%BB%98%E6%B8%A0%E9%81%93-extra-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E)，例：
+##### 将 `open_id` 作为创建 `payment` 时的 `extra` 参数，具体方法参考[技术文档](https://www.mofanbaby.com/api/xpay#%E6%94%AF%E4%BB%98%E6%B8%A0%E9%81%93-extra-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E)，例：
 
 ```js
 {
@@ -266,11 +266,11 @@ $open_id = \Xpay\WxpubOAuth::getOpenid($wx_app_id, $wx_app_secret, $code);
 }
 ```
 
-##### 得到 `charge` 后，在页面中引用 `xpay.js` ，调用 `xpay.createPayment`，结果会直接在 `callback` 中返回。
+##### 得到 `payment` 后，在页面中引用 `xpay.js` ，调用 `xpay.createPayment`，结果会直接在 `callback` 中返回。
 
 ```js
 var xpay = require('xpay.js 的绝对路径');
-xpay.createPayment(charge, function(result, err) {
+xpay.createPayment(payment, function(result, err) {
   if (result=="success") {
     // payment succeeded
   } else {
@@ -306,12 +306,12 @@ xpay.createPayment(charge, function(result, err) {
 
 ``` js
 // 在支付页调用支付：
-xpay_ui.createPayment(charge, function(res, err) {
+xpay_ui.createPayment(payment, function(res, err) {
     if (result == "success") {
     	// 只有微信公众号 (wx_pub)、QQ 公众号 (qpay_pub)
     	//支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL
     } else if (result == "fail") {
-        // charge 不正确或者微信公众号/QQ 公众号支付失败时会在此处返回
+        // payment 不正确或者微信公众号/QQ 公众号支付失败时会在此处返回
     } else if (result == "cancel") {
         // 微信公众号/QQ 公众号支付取消支付
     }
@@ -350,12 +350,12 @@ xpay_ui.init({
 
 ``` js
 // 在支付页调用支付：
-xpay_ui.createPayment(charge, function(res, err) {
+xpay_ui.createPayment(payment, function(res, err) {
     if (result == "success") {
     	// 只有微信公众号 (wx_pub)、QQ 公众号 (qpay_pub)
     	//支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL
     } else if (result == "fail") {
-        // charge 不正确或者微信公众号/QQ 公众号支付失败时会在此处返回
+        // payment 不正确或者微信公众号/QQ 公众号支付失败时会在此处返回
     } else if (result == "cancel") {
         // 微信公众号/QQ 公众号支付取消支付
     }
