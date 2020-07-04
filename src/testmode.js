@@ -1,7 +1,7 @@
 var utils = require('./utils');
 var hasOwn = {}.hasOwnProperty;
 module.exports = {
-  PINGPP_MOCK_URL: 'http://sissi.mofanbaby.com/mock.php',
+  XPAY_MOCK_URL: 'http://sissi.mofanbaby.com/mock.php',
 
   runTestMode: function (charge) {
     var params = {
@@ -24,7 +24,7 @@ module.exports = {
       params.extra = encodeURIComponent(JSON.stringify(charge.extra));
     }
     utils.redirectTo(
-      this.PINGPP_MOCK_URL + '?' + utils.stringifyData(params),
+      this.XPAY_MOCK_URL + '?' + utils.stringifyData(params),
       charge.channel
     );
   }

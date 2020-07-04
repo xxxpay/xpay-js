@@ -18,10 +18,10 @@
 - 修改：支持小程序模拟支付
 
 ### 2.2.1 (2018-01-18)
-- 新增：`pingpp_ui`
+- 新增：`xpay_ui`
 
 ### 2.1.16 (2017-12-11)
-- 新增: `pingpp.setUrlReturnCallback` 方法，支持获取支付页面地址而不是直接跳转
+- 新增: `xpay.setUrlReturnCallback` 方法，支持获取支付页面地址而不是直接跳转
 
 ### 2.1.15 (2017-10-18)
 - 新增: 支付宝口碑渠道 (alipay_qr)
@@ -83,9 +83,9 @@
 - 新增：添加企业网银支付（cp_b2b）
 
 ### 2.0.7
-- 更改：重命名文件名为 pingpp.js  
+- 更改：重命名文件名为 xpay.js  
 - 更改：删除无用配置  
-- 新增：增加 PC 端接口，pingpp-pc.js，调用方式为 `pingppPc.createPayment(charge, callback)`
+- 新增：增加 PC 端接口，xpay-pc.js，调用方式为 `xpayPc.createPayment(charge, callback)`
 
 ### 2.0.6
 - 新增：添加京东钱包 WAP 支付

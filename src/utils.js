@@ -30,7 +30,7 @@ var utils = module.exports = {
         continue;
       }
       output.push(i + '=' +
-          (urlencode ? encodeURIComponent(data[i]) : data[i]));
+        (urlencode ? encodeURIComponent(data[i]) : data[i]));
     }
     return output.join('&');
   },
@@ -122,7 +122,7 @@ var utils = module.exports = {
       length = 32;
     }
     var chars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var maxPos = chars.length;
     var str = '';
     for (var i = 0; i < length; i++) {
@@ -160,11 +160,11 @@ var utils = module.exports = {
     return ua.indexOf('alipayclient') !== -1;
   },
 
-  inWxLite: function() {
-    if(typeof wx === 'undefined') {
+  inWxLite: function () {
+    if (typeof wx === 'undefined') {
       return false;
     }
-    
+
     return wx.miniProgram || wx.requestPayment;
   },
 
@@ -195,8 +195,8 @@ var utils = module.exports = {
             return false;
           }
 
-          if (!nodeScript.readyState || nodeScript.readyState == 'loaded'
-              || nodeScript.readyState == 'complete') {
+          if (!nodeScript.readyState || nodeScript.readyState == 'loaded' ||
+            nodeScript.readyState == 'complete') {
             nodeScript.ready = true;
             callback();
           }
