@@ -23,7 +23,7 @@
     "gulp-uglify": "^3.0.1",
     "gulp-util": "^3.0.8",
     "lodash": "^4.17.11",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.5",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   },

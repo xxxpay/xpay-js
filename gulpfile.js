@@ -1,6 +1,11 @@
 /*global __dirname,process*/
+const {
+  series,
+  watch,
+  dest
+} = require('gulp');
+
 var browserify = require('browserify');
-var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
@@ -29,13 +34,11 @@ var deprecatedChannels = ['upmp_wap'];
 
 var parseArgs = require('minimist');
 var cmdOptions = parseArgs(process.argv.slice(2), {
-  boolean: ['alipay_in_weixin', 'wx_jssdk'],
-  string: ['channels', 'name', 'ui']
+  boolean: ['alipay_in_weixin', 'wx_jssdk', 'agreement'],
+  string: ['channels', 'name']
 });
 
-gulp.task('default', ['build']);
-
-gulp.task('build', ['clean', 'modules'], function() {
+function build(cb) {
   if (hasOwn.call(cmdOptions, 'name') && cmdOptions.name.length > 0) {
     releaseObjectName = cmdOptions.name;
   }
@@ -46,7 +49,7 @@ gulp.task('build', ['clean', 'modules'], function() {
     debug: true
   });
 
-  return b.bundle()
+  b.bundle()
     .pipe(source(destJsFile))
     .pipe(buffer())
     .pipe(sourcemaps.init({
@@ -63,10 +66,12 @@ gulp.task('build', ['clean', 'modules'], function() {
     }))
     .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(distDir));
-});
+    .pipe(dest(distDir));
 
-gulp.task('modules', [], function() {
+  cb();
+}
+
+function modules(cb) {
   var channels = makeChannelModulesContent();
 
   var libs = makeLibModulesContent();
@@ -80,41 +85,30 @@ gulp.task('modules', [], function() {
     libs.replacement);
   fs.writeFileSync(modsJsFile, modsContents, 'utf8');
   console.log('Enabled channels: ' + channels.enabledChannels);
-});
+  cb();
+}
 
-gulp.task('clean', function() {
+function clean(cb) {
   var paths = del.sync(distFiles);
   console.log('Deleted files and folders:\n' + paths.join('\n'));
-});
+  cb();
+}
 
-gulp.task('test', [], function() {
-  var test = require('./test/test.js');
-  test.run();
-});
-
-gulp.task('watch', ['build'], function() {
-  var watcher = gulp.watch(scriptSrcFiles, ['build']);
-  watcher.on('change', function(event) {
-    console.log('File ' + event.path + ' was ' +
-      event.type + ', running tasks...');
-  });
-});
-
-var makeChannelModulesContent = function() {
+var makeChannelModulesContent = function () {
   var channelPool = fs.readdirSync(channelsDirPath, 'utf8');
-  var allChannels = _.map(channelPool, function(ch) {
+  var allChannels = _.map(channelPool, function (ch) {
     if (ch.substr(0, 1) == '.' || ch.substr(-3) != '.js') {
       return undefined;
     }
     return ch.substr(0, ch.length - 3);
   });
-  allChannels = _.remove(allChannels, function(ch) {
+  allChannels = _.remove(allChannels, function (ch) {
     return typeof ch != 'undefined';
   });
   var enabledChannels;
   if (hasOwn.call(cmdOptions, 'channels') && cmdOptions.channels.length > 0) {
     enabledChannels = _.split(cmdOptions.channels, /[\s,]+/);
-    _.forEach(enabledChannels, function(ch) {
+    _.forEach(enabledChannels, function (ch) {
       if (!_.includes(allChannels, ch)) {
         console.log('Channel ' + ch +
           ' is invalid. The channels you can use: ' + allChannels + '.');
@@ -122,7 +116,7 @@ var makeChannelModulesContent = function() {
       }
     });
   } else {
-    enabledChannels = _.remove(allChannels, function(ch) {
+    enabledChannels = _.remove(allChannels, function (ch) {
       return !_.includes(deprecatedChannels, ch);
     });
   }
@@ -140,7 +134,7 @@ var makeChannelModulesContent = function() {
   };
 };
 
-var makeLibModulesContent = function() {
+var makeLibModulesContent = function () {
   var extraBaseDir = './channels/extras/';
   var extranames = [];
   if (hasOwn.call(cmdOptions, 'alipay_in_weixin') &&
@@ -151,8 +145,8 @@ var makeLibModulesContent = function() {
     cmdOptions.wx_jssdk) {
     extranames.push('wx_jssdk');
   }
-  if (hasOwn.call(cmdOptions, 'ui')) {
-    extranames.push(['ui', './xpay_ui/init']);
+  if (hasOwn.call(cmdOptions, 'agreement')) {
+    extranames.push(['agreement', './agreement']);
   }
 
   return {
@@ -160,7 +154,7 @@ var makeLibModulesContent = function() {
   };
 };
 
-var modnames2text = function(modnames, baseDir) {
+var modnames2text = function (modnames, baseDir) {
   if (modnames.length === 0) {
     return '';
   }
@@ -185,3 +179,21 @@ var modnames2text = function(modnames, baseDir) {
 
   return '  ' + _.join(modsContents, ',\n  ');
 };
+
+function watchFiles(cb) {
+  var watcher = watch(scriptSrcFiles, series(build));
+  watcher.on('change', function (path) {
+    console.log('File \'' + path + '\' was changed, running tasks...');
+  });
+
+  cb();
+}
+
+exports.test = function (cb) {
+  var test = require('./test/test.js');
+  test.run();
+  cb();
+};
+exports.build = series(clean, modules, build);
+exports.watch = series(clean, build, watchFiles);
+exports.default = series(build);

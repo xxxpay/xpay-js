@@ -30,13 +30,14 @@
                     <span class="up" onclick="wap_pay('jdpay_wap')">京东支付 WAP</span>
                     <span class="up" onclick="wap_pay('yeepay_wap')">易宝支付 WAP</span>
                     <span class="up" onclick="wap_pay('wx_pub')">微信浏览器内公众号支付 WAP</span>
+                    <span class="up" onclick="wap_pay('wx_wap')">微信外部浏览器支付 WAP</span>
                 </div>
             </div>
         </div>
     </section>
     <script src="../../dist/xpay.js" type="text/javascript"></script>
     <script>
-        var YOUR_URL = '填写自己获取charge的URL';
+        var YOUR_URL = '填写自己获取payment的URL';
 
         function wap_pay(channel) {
 
