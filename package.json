@@ -1,6 +1,6 @@
 {
   "name": "xpay",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "description": "Xpay HTML5 SDK",
   "main": "src/main.js",
   "homepage": "https://www.mofanbaby.com/xpay",
