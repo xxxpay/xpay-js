@@ -12,7 +12,7 @@ module.exports = {
   handleCharge: function(charge) {
     var credential = charge.credential[charge.channel];
     var fields = [
-      'appId', 'timestamp', 'nonceStr', 'package', 'signType', 'paySign'
+      'appId', 'timeStamp', 'nonceStr', 'package', 'signType', 'paySign'
     ];
     for (var k = 0; k < fields.length; k++) {
       if (!hasOwn.call(credential, fields[k])) {

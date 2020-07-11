@@ -13,7 +13,7 @@ module.exports = {
     wx.config({
       debug: typeof stash.debug == 'boolean' ? stash.debug : false,
       appId: stash.jsApiParameters.appId,
-      timestamp: stash.jsApiParameters.timestamp,
+      timestamp: stash.jsApiParameters.timeStamp,
       nonceStr: stash.jsApiParameters.nonceStr,
       signature: stash.signature,
       jsApiList: ['chooseWXPay']
@@ -25,7 +25,7 @@ module.exports = {
         return;
       }
       wx.chooseWXPay({
-        timestamp: stash.jsApiParameters.timestamp,
+        timestamp: stash.jsApiParameters.timeStamp,
         nonceStr: stash.jsApiParameters.nonceStr,
         'package': stash.jsApiParameters.package,
         signType: stash.jsApiParameters.signType,
