@@ -6,7 +6,7 @@ module.exports = {
   CMB_WALLET_URL:
     'https://netpay.cmbchina.com/netpayment/BaseHttp.dll?MB_EUserPay',
 
-  handleCharge: function(payment) {
+  handlePayment: function(payment) {
     var credential = payment.credential[payment.channel];
     var request_url = this.CMB_WALLET_URL;
     if (hasOwn.call(credential, 'ChannelUrl')) {

@@ -7,7 +7,7 @@ module.exports = {
   YEEPAY_WAP_URL: 'https://ok.yeepay.com/paymobile/api/pay/request',
   YEEPAY_WAP_TEST_URL: 'http://mobiletest.yeepay.com/paymobile/api/pay/request',
 
-  handleCharge: function(payment) {
+  handlePayment: function(payment) {
     var channel = payment.channel;
     var credential = payment.credential[channel];
     var fields = ['merchantaccount', 'encryptkey', 'data'];

@@ -3,7 +3,7 @@ var hasOwn = {}.hasOwnProperty;
 
 module.exports = {
 
-  handleCharge: function(payment) {
+  handlePayment: function(payment) {
     var channel = payment.channel;
     var credential = payment.credential[channel];
     var baseURL;

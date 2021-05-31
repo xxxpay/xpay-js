@@ -87,7 +87,7 @@ module.exports = {
               return;
             }
             stash.type = 'charge_success';
-            xpay.createPayment(res, _this.callbackCharge);
+            xpay.createPayment(res, _this.callbackPayment);
           } else {
             utils.hideLoading();
             utils.close();
@@ -134,7 +134,7 @@ module.exports = {
     });
   },
 
-  callbackCharge: function (result, err) {
+  callbackPayment: function (result, err) {
     var _this = this;
     utils.close();
     if (result == 'fail') {

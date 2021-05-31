@@ -4,7 +4,7 @@ var hasOwn = {}.hasOwnProperty;
 
 module.exports = {
 
-  handleCharge: function(payment) {
+  handlePayment: function(payment) {
     var credential = payment.credential[payment.channel];
     if (typeof credential === 'string') {
       utils.redirectTo(credential, payment.channel);

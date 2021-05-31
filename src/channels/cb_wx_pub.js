@@ -9,7 +9,7 @@ module.exports = {
 
   XPAY_NOTIFY_URL_BASE: 'https://notify.mofanbaby.com/notify',
 
-  handleCharge: function(payment) {
+  handlePayment: function(payment) {
     var credential = payment.credential[payment.channel];
     var fields = [
       'appId', 'timeStamp', 'nonceStr', 'package', 'signType', 'paySign'

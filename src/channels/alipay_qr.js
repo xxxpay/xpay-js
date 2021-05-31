@@ -4,7 +4,7 @@ var callbacks = require('../callbacks');
 /*global AlipayJSBridge*/
 module.exports = {
 
-  handleCharge: function (payment) {
+  handlePayment: function (payment) {
     var credential = payment.credential[payment.channel];
     if (hasOwn.call(credential, 'transaction_no')) {
       this.tradePay(credential.transaction_no);

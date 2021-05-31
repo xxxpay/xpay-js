@@ -7,7 +7,7 @@ module.exports = {
   JDPAY_H5_URL: 'https://h5pay.jd.com/jdpay/saveOrder',
   JDPAY_PC_URL: 'https://wepay.jd.com/jdpay/saveOrder',
 
-  handleCharge: function(payment) {
+  handlePayment: function(payment) {
     var credential = payment.credential[payment.channel];
     var request_url = this.JDPAY_H5_URL;
     if (hasOwn.call(credential, 'channelUrl')) {

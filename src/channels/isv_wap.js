@@ -4,7 +4,7 @@ var utils = require('../utils');
 var hasOwn = {}.hasOwnProperty;
 
 module.exports = {
-  handleCharge: function (payment) {
+  handlePayment: function (payment) {
     var extra = payment.extra;
     if (hasOwn.call(extra, 'pay_channel')) {
       var pay_channel = extra.pay_channel;
@@ -22,6 +22,6 @@ module.exports = {
         callbacks.error('invalid_charge', 'payment 格式不正确'));
       return;
     }
-    redirectBase.handleCharge(payment);
+    redirectBase.handlePayment(payment);
   }
 };

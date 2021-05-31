@@ -8,7 +8,7 @@ module.exports = {
   SRC_URL: 'https://open.mobile.qq.com/sdk/qqapi.js?_bid=152',
   ID: 'mqq_api',
 
-  handleCharge: function (payment) {
+  handlePayment: function (payment) {
     var credential = payment.credential[payment.channel];
 
     if (!hasOwn.call(credential, 'token_id')) {

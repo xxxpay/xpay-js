@@ -94,7 +94,7 @@ XPaySDK.prototype.createPayment = function (
   if (typeof debug == 'boolean') {
     stash.debug = debug;
   }
-  channelModule.handleCharge(payment_elements);
+  channelModule.handlePayment(payment_elements);
 };
 
 XPaySDK.prototype.setAPURL = function (url) {
