@@ -17,22 +17,22 @@ var dc = require('./collection');
 var payment_elements = require('./payment_elements');
 
 XPaySDK.prototype.createPayment = function (
-  chargeJSON, callback, signature, debug
+  paymentJSON, callback, signature, debug
 ) {
   if (typeof callback === 'function') {
     callbacks.userCallback = callback;
   }
 
-  payment_elements.init(chargeJSON);
+  payment_elements.init(paymentJSON);
 
   if (!hasOwn.call(payment_elements, 'id')) {
     callbacks.innerCallback('fail',
-      callbacks.error('invalid_charge', 'no_charge_id'));
+      callbacks.error('invalid_payment', 'no_payment_id'));
     return;
   }
   if (!hasOwn.call(payment_elements, 'channel')) {
     callbacks.innerCallback('fail',
-      callbacks.error('invalid_charge', 'no_channel'));
+      callbacks.error('invalid_payment', 'no_channel'));
     return;
   }
 
@@ -52,7 +52,7 @@ XPaySDK.prototype.createPayment = function (
   var channel = payment_elements.channel;
   if (!hasOwn.call(payment_elements, 'credential')) {
     callbacks.innerCallback('fail',
-      callbacks.error('invalid_charge', 'no_credential'));
+      callbacks.error('invalid_payment', 'no_credential'));
     return;
   }
   if (!payment_elements.credential) {
@@ -67,7 +67,7 @@ XPaySDK.prototype.createPayment = function (
   }
   if (!hasOwn.call(payment_elements, 'livemode')) {
     callbacks.innerCallback('fail',
-      callbacks.error('invalid_charge', 'no_livemode_field'));
+      callbacks.error('invalid_payment', 'no_livemode_field'));
     return;
   }
   var channelModule = mods.getChannelModule(channel);

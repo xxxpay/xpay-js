@@ -19,7 +19,7 @@ module.exports = {
       }
     } else {
       callbacks.innerCallback('fail',
-        callbacks.error('invalid_charge', 'payment 格式不正确'));
+        callbacks.error('invalid_payment', 'payment 格式不正确'));
       return;
     }
     redirectBase.handlePayment(payment);

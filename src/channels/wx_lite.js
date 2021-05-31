@@ -55,7 +55,7 @@ module.exports = {
   },
 
   runTestMode: function (payment) {
-    var path = '/charges/' + payment.id;
+    var path = '/payments/' + payment.id;
     wx.request({
       url: this.XPAY_NOTIFY_URL_BASE + path + '?livemode=false',
       success: function(res) {

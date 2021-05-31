@@ -44,7 +44,7 @@ module.exports = {
       "transaction_no": null,
       "refunds": {
         "object": "list",
-        "url": "/v1/charges/ch_jD0mL8L88i9Sub9OG0qTiTOS/refunds",
+        "url": "/v1/payments/ch_jD0mL8L88i9Sub9OG0qTiTOS/refunds",
         "has_more": false,
         "data": []
       },
@@ -63,7 +63,7 @@ module.exports = {
           "timestamp": "2017-12-11 20:16:30",
           "version": "1.0",
           "biz_content": "{\"body\":\"订单详情\",\"subject\":\"测试订单\",\"out_trade_no\":\"201700211512994583\",\"total_amount\":1,\"product_code\":\"FAST_INSTANT_TRADE_PAY\",\"timeout_express\":\"1440m\",\"qr_pay_mode\":4,\"qrcode_width\":300}",
-          "notify_url": "https://notify.mofanbaby.com/notify/charges/ch_jD0mL8L88i9Sub9OG0qTiTOS",
+          "notify_url": "https://notify.mofanbaby.com/notify/payments/ch_jD0mL8L88i9Sub9OG0qTiTOS",
           "return_url": "https://example.com/success",
           "sign": "qj7mZXBmp7s8aoWlfruqbJWNZc/Qmzrzo1BFhYvbQL6dJskc3NX7oScZuwJIoBhts/mgO77+ziYceI1XANJBhXhFzwJQS0vgEBpwzxAEY008FSbf8Rolfck6C2lyXH+4uhjlk5bzwBAMa2VudR0zcfK1/rUiHVNuG/YHhQIietyyG1SVL/YnMhwo+b7cDLn87pj6/tYRxBNob9cLRMZLQ9JOgHb2JRuRxDpiIpfSlBQMMnoC2TvkUkrLGjhdSsUXd1QqTDbT28+tsMtPMBIjw4Lmgpw6Qr/Y39MtVTOUiSIHdwnG37+8GVML6zfP9v6KNYwH62GNIU0PfpsMzv4p+w==",
           "channel_url": "https://openapi.alipay.com/gateway.do"

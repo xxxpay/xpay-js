@@ -203,7 +203,7 @@ var xpay_ui = {
 
       comUtil.request(_this.AD_URL, 'GET', {
         app: stash.app_id,
-        charge_id: stash.ch_id,
+        payment_id: stash.ch_id,
         amount:stash.amount,
         subject: stash.subject,
         channel: stash.channel,

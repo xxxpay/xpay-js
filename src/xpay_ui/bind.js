@@ -35,7 +35,7 @@ module.exports = {
         channel = target.parentNode.parentNode.getAttribute('p_one_channel');
       }
 
-      if(!stash.userData.charge_url) {
+      if(!stash.userData.payment_url) {
         stash.userCallback(channel);
         utils.close();
         return;
@@ -50,14 +50,14 @@ module.exports = {
         postData.open_id = stash.userData.open_id;
       }
 
-      if (stash.userData.charge_param) {
-        var charge_param = stash.userData.charge_param;
-        for (var i in charge_param) {
-          postData[i] = charge_param[i];
+      if (stash.userData.payment_param) {
+        var payment_param = stash.userData.payment_param;
+        for (var i in payment_param) {
+          postData[i] = payment_param[i];
         }
       }
 
-      commUtils.request(stash.userData.charge_url,
+      commUtils.request(stash.userData.payment_url,
         'POST', postData, function (res, code) {
           utils.hideLoading();
           if (code == 200) {
@@ -82,16 +82,16 @@ module.exports = {
                 status: true,
                 msg: 'payment success',
                 debug: stash.isDebugMode,
-                chargeUrlOutput: res
+                paymentUrlOutput: res
               });
               return;
             }
-            stash.type = 'charge_success';
+            stash.type = 'payment_success';
             xpay.createPayment(res, _this.callbackPayment);
           } else {
             utils.hideLoading();
             utils.close();
-            collection.report({type:'charge_fail',channel:channel});
+            collection.report({type:'payment_fail',channel:channel});
             stash.userCallback({
               status: false,
               msg: 'network error',
@@ -142,14 +142,14 @@ module.exports = {
         status: false,
         msg: err.msg,
         debug: stash.isDebugMode,
-        chargeUrlOutput: _this.payment
+        paymentUrlOutput: _this.payment
       });
     } else if (result == 'cancel') {  // 微信公众账号支付取消支付
       stash.userCallback({
         status: false,
         msg: 'cancel',
         debug: stash.isDebugMode,
-        chargeUrlOutput: _this.payment
+        paymentUrlOutput: _this.payment
       });
     } else if (result == 'success') { // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
       stash.userCallback({
@@ -157,7 +157,7 @@ module.exports = {
         msg: result,
         wxSuccess: true,
         debug: stash.isDebugMode,
-        chargeUrlOutput: _this.payment
+        paymentUrlOutput: _this.payment
       });
     }
   }
