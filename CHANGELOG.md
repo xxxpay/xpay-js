@@ -28,7 +28,7 @@
 - 修复：DOM security error
 
 ### 2.1.14 (2017-09-28)
-- 修复：账户系统 1.4 中多 charge 取值问题
+- 修复：账户系统 1.4 中多 payment 取值问题
 
 ### 2.1.13 (2017-08-28)
 - 更新：兼容账户系统 1.4
@@ -85,7 +85,7 @@
 ### 2.0.7
 - 更改：重命名文件名为 xpay.js  
 - 更改：删除无用配置  
-- 新增：增加 PC 端接口，xpay-pc.js，调用方式为 `xpayPc.createPayment(charge, callback)`
+- 新增：增加 PC 端接口，xpay-pc.js，调用方式为 `xpayPc.createPayment(payment, callback)`
 
 ### 2.0.6
 - 新增：添加京东钱包 WAP 支付

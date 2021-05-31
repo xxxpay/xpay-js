@@ -12,7 +12,7 @@ module.exports = {
   buttonClickable: true,
   maskClickable: true,
   moveFlag: false,
-  charge: {},
+  payment: {},
 
   init: function () {
     var _this = this;
@@ -61,7 +61,7 @@ module.exports = {
         'POST', postData, function (res, code) {
           utils.hideLoading();
           if (code == 200) {
-            _this.charge = res;
+            _this.payment = res;
 
             try{
               var json = JSON.parse(res);
@@ -75,12 +75,12 @@ module.exports = {
             if (stash.isDebugMode) {//debug模式下暂停，调用resume之后继续
               _this.buttonClickable = true;
 
-              stash.charge = res;
+              stash.payment = res;
               stash.channel = channel;
 
               stash.userCallback({
                 status: true,
-                msg: 'charge success',
+                msg: 'payment success',
                 debug: stash.isDebugMode,
                 chargeUrlOutput: res
               });
@@ -142,14 +142,14 @@ module.exports = {
         status: false,
         msg: err.msg,
         debug: stash.isDebugMode,
-        chargeUrlOutput: _this.charge
+        chargeUrlOutput: _this.payment
       });
     } else if (result == 'cancel') {  // 微信公众账号支付取消支付
       stash.userCallback({
         status: false,
         msg: 'cancel',
         debug: stash.isDebugMode,
-        chargeUrlOutput: _this.charge
+        chargeUrlOutput: _this.payment
       });
     } else if (result == 'success') { // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
       stash.userCallback({
@@ -157,7 +157,7 @@ module.exports = {
         msg: result,
         wxSuccess: true,
         debug: stash.isDebugMode,
-        chargeUrlOutput: _this.charge
+        chargeUrlOutput: _this.payment
       });
     }
   }

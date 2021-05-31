@@ -9,8 +9,8 @@ module.exports = {
 
   XPAY_NOTIFY_URL_BASE: 'https://notify.mofanbaby.com/notify',
 
-  handleCharge: function (charge) {
-    var credential = charge.credential[charge.channel];
+  handleCharge: function (payment) {
+    var credential = payment.credential[payment.channel];
     var fields = [
       'appId', 'timeStamp', 'nonceStr', 'package', 'signType', 'paySign'
     ];
@@ -54,8 +54,8 @@ module.exports = {
     wx.requestPayment(wx_lite);
   },
 
-  runTestMode: function (charge) {
-    var path = '/charges/' + charge.id;
+  runTestMode: function (payment) {
+    var path = '/charges/' + payment.id;
     wx.request({
       url: this.XPAY_NOTIFY_URL_BASE + path + '?livemode=false',
       success: function(res) {

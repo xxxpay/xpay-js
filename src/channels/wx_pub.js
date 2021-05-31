@@ -9,8 +9,8 @@ module.exports = {
 
   XPAY_NOTIFY_URL_BASE: 'https://notify.mofanbaby.com/notify',
 
-  handleCharge: function(charge) {
-    var credential = charge.credential[charge.channel];
+  handleCharge: function(payment) {
+    var credential = payment.credential[payment.channel];
     var fields = [
       'appId', 'timeStamp', 'nonceStr', 'package', 'signType', 'paySign'
     ];
@@ -66,10 +66,10 @@ module.exports = {
     }
   },
 
-  runTestMode: function(charge) {
+  runTestMode: function(payment) {
     var dopay = confirm('模拟付款？');
     if (dopay) {
-      var path = '/charges/' + charge.id;
+      var path = '/charges/' + payment.id;
       utils.request(this.XPAY_NOTIFY_URL_BASE + path + '?livemode=false',
         'GET', null,
         function(data, status) {

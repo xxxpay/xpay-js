@@ -16,9 +16,9 @@ module.exports = {
       console.log(url);
     });
 
-    var charge = {
+    var payment = {
       "id": "ch_jD0mL8L88i9Sub9OG0qTiTOS",
-      "object": "charge",
+      "object": "payment",
       "created": 1512994590,
       "livemode": true,
       "paid": false,
@@ -72,7 +72,7 @@ module.exports = {
       "description": null
     };
 
-    xpay.createPayment(charge, function(result, error){
+    xpay.createPayment(payment, function(result, error){
       console.log(result);
       console.log(error);
     });

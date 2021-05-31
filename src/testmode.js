@@ -3,29 +3,29 @@ var hasOwn = {}.hasOwnProperty;
 module.exports = {
   XPAY_MOCK_URL: 'http://sissi.mofanbaby.com/mock.php',
 
-  runTestMode: function (charge) {
+  runTestMode: function (payment) {
     var params = {
-      'ch_id': charge.id,
+      'ch_id': payment.id,
       'scheme': 'http',
-      'channel': charge.channel
+      'channel': payment.channel
     };
 
-    if (hasOwn.call(charge, 'order_no')) {
-      params.order_no = charge.order_no;
-    } else if (hasOwn.call(charge, 'orderNo')) {
-      params.order_no = charge.orderNo;
+    if (hasOwn.call(payment, 'order_no')) {
+      params.order_no = payment.order_no;
+    } else if (hasOwn.call(payment, 'orderNo')) {
+      params.order_no = payment.orderNo;
     }
-    if (hasOwn.call(charge, 'time_expire')) {
-      params.time_expire = charge.time_expire;
-    } else if (hasOwn.call(charge, 'timeExpire')) {
-      params.time_expire = charge.timeExpire;
+    if (hasOwn.call(payment, 'time_expire')) {
+      params.time_expire = payment.time_expire;
+    } else if (hasOwn.call(payment, 'timeExpire')) {
+      params.time_expire = payment.timeExpire;
     }
-    if (hasOwn.call(charge, 'extra')) {
-      params.extra = encodeURIComponent(JSON.stringify(charge.extra));
+    if (hasOwn.call(payment, 'extra')) {
+      params.extra = encodeURIComponent(JSON.stringify(payment.extra));
     }
     utils.redirectTo(
       this.XPAY_MOCK_URL + '?' + utils.stringifyData(params),
-      charge.channel
+      payment.channel
     );
   }
 };

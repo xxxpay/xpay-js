@@ -4,8 +4,8 @@ var utils = require('../utils');
 var hasOwn = {}.hasOwnProperty;
 
 module.exports = {
-  handleCharge: function (charge) {
-    var extra = charge.extra;
+  handleCharge: function (payment) {
+    var extra = payment.extra;
     if (hasOwn.call(extra, 'pay_channel')) {
       var pay_channel = extra.pay_channel;
       if (pay_channel === 'wx' && !utils.inWeixin()) {
@@ -19,9 +19,9 @@ module.exports = {
       }
     } else {
       callbacks.innerCallback('fail',
-        callbacks.error('invalid_charge', 'charge 格式不正确'));
+        callbacks.error('invalid_charge', 'payment 格式不正确'));
       return;
     }
-    redirectBase.handleCharge(charge);
+    redirectBase.handleCharge(payment);
   }
 };

@@ -4,8 +4,8 @@ var hasOwn = {}.hasOwnProperty;
 
 module.exports = {
 
-  handleCharge: function(charge) {
-    var credential = charge.credential[charge.channel];
+  handleCharge: function(payment) {
+    var credential = payment.credential[payment.channel];
     var targetURL;
     if (typeof credential === 'string') {
       targetURL = credential;
@@ -16,6 +16,6 @@ module.exports = {
         'credential format is incorrect'));
       return;
     }
-    utils.redirectTo(targetURL, charge.channel);
+    utils.redirectTo(targetURL, payment.channel);
   }
 };

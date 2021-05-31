@@ -4,8 +4,8 @@ module.exports = {
 
   UPMP_WAP_URL: 'uppay://uppayservice/?style=token&paydata=',
 
-  handleCharge: function(charge) {
-    var credential = charge.credential[charge.channel];
-    utils.redirectTo(this.UPMP_WAP_URL + credential.paydata, charge.channel);
+  handleCharge: function(payment) {
+    var credential = payment.credential[payment.channel];
+    utils.redirectTo(this.UPMP_WAP_URL + credential.paydata, payment.channel);
   }
 };

@@ -5,9 +5,9 @@ module.exports = {
 
   ALIPAY_PC_DIRECT_URL: 'https://mapi.alipay.com/gateway.do',
 
-  handleCharge: function(charge) {
-    var channel = charge.channel;
-    var credential = charge.credential[channel];
+  handleCharge: function(payment) {
+    var channel = payment.channel;
+    var credential = payment.credential[channel];
     var baseURL = this.ALIPAY_PC_DIRECT_URL;
     if (hasOwn.call(credential, 'channel_url')) {
       baseURL = credential.channel_url;

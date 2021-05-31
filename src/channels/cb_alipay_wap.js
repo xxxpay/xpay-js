@@ -7,9 +7,9 @@ module.exports = {
   ALIPAY_WAP_URL_OLD: 'https://wappaygw.alipay.com/service/rest.htm',
   ALIPAY_WAP_URL: 'https://mapi.alipay.com/gateway.do',
 
-  handleCharge: function(charge) {
-    var channel = charge.channel;
-    var credential = charge.credential[channel];
+  handleCharge: function(payment) {
+    var channel = payment.channel;
+    var credential = payment.credential[channel];
     var baseURL = this.ALIPAY_WAP_URL;
     if (hasOwn.call(credential, 'req_data')) {
       baseURL = this.ALIPAY_WAP_URL_OLD;

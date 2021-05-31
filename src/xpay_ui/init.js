@@ -140,7 +140,7 @@ var xpay_ui = {
   },
 
   resume: function () {
-    xpay.createPayment(stash.charge, bind.callbackCharge);
+    xpay.createPayment(stash.payment, bind.callbackCharge);
   },
 
   createPayment: function(data, callback) {
